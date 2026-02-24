@@ -67,7 +67,7 @@ export function GenerateDemoLeadsDialog({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       {showTrigger ? (
-        <Button variant="outline" onClick={() => setOpen(true)}>
+        <Button variant="outline" onClick={() => setOpen(true)} className="w-full sm:w-auto">
           Generate 10 demo leads
         </Button>
       ) : null}

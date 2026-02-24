@@ -28,7 +28,7 @@ export function LogoutButton() {
   return (
     <Button variant="outline" size="sm" onClick={onSignOut} disabled={isPending}>
       <LogOut className="size-4" />
-      {isPending ? "Signing out..." : "Sign out"}
+      <span className="hidden sm:inline">{isPending ? "Signing out..." : "Sign out"}</span>
     </Button>
   );
 }

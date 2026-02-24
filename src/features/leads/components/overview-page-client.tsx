@@ -69,7 +69,7 @@ export function OverviewPageClient() {
           title="Your workspace is ready"
           description="Start by importing your first CSV or generate demo leads in one click."
         />
-        <div className="flex items-center gap-2">
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
           <Button asChild>
             <Link href="/leads">Go to leads</Link>
           </Button>
@@ -80,7 +80,7 @@ export function OverviewPageClient() {
   }
 
   return (
-    <section className="space-y-6">
+    <section className="space-y-5 sm:space-y-6">
       <header className="space-y-1">
         <h1 className="text-2xl font-semibold">Overview</h1>
         <p className="text-sm text-muted-foreground">
@@ -88,11 +88,11 @@ export function OverviewPageClient() {
         </p>
       </header>
 
-      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+      <div className="grid gap-3 sm:gap-4 md:grid-cols-2 xl:grid-cols-4">
         <Card>
           <CardHeader>
             <CardDescription>Total leads</CardDescription>
-            <CardTitle className="text-3xl">{summary.totalLeads}</CardTitle>
+            <CardTitle className="text-2xl sm:text-3xl">{summary.totalLeads}</CardTitle>
           </CardHeader>
           <CardContent>
             <p className="text-xs text-muted-foreground">Active leads in your pipeline.</p>
@@ -102,7 +102,7 @@ export function OverviewPageClient() {
         <Card>
           <CardHeader>
             <CardDescription>New this week</CardDescription>
-            <CardTitle className="text-3xl">{summary.newThisWeek}</CardTitle>
+            <CardTitle className="text-2xl sm:text-3xl">{summary.newThisWeek}</CardTitle>
           </CardHeader>
           <CardContent>
             <p className="text-xs text-muted-foreground">
@@ -114,7 +114,7 @@ export function OverviewPageClient() {
         <Card>
           <CardHeader>
             <CardDescription>Contacted</CardDescription>
-            <CardTitle className="text-3xl">{summary.contactedCount}</CardTitle>
+            <CardTitle className="text-2xl sm:text-3xl">{summary.contactedCount}</CardTitle>
           </CardHeader>
           <CardContent>
             <p className="text-xs text-muted-foreground">Leads moved beyond new stage.</p>
@@ -124,7 +124,7 @@ export function OverviewPageClient() {
         <Card>
           <CardHeader>
             <CardDescription>Win rate</CardDescription>
-            <CardTitle className="text-3xl">{summary.winRate}%</CardTitle>
+            <CardTitle className="text-2xl sm:text-3xl">{summary.winRate}%</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="h-2 w-full overflow-hidden rounded-full bg-muted">
@@ -137,7 +137,7 @@ export function OverviewPageClient() {
         </Card>
       </div>
 
-      <div className="grid gap-4 lg:grid-cols-[1.3fr_1fr]">
+      <div className="grid gap-3 sm:gap-4 lg:grid-cols-[1.3fr_1fr]">
         <Card>
           <CardHeader>
             <CardTitle>Pipeline health</CardTitle>
@@ -198,7 +198,10 @@ export function OverviewPageClient() {
         </CardHeader>
         <CardContent className="space-y-3">
           {summary.recentLeads.map((lead) => (
-            <div key={lead.id} className="flex items-center justify-between rounded-md border p-3">
+            <div
+              key={lead.id}
+              className="flex flex-col gap-2 rounded-md border p-3 sm:flex-row sm:items-center sm:justify-between"
+            >
               <div>
                 <Link href={`/leads/${lead.id}`} className="font-medium hover:underline">
                   {lead.name}

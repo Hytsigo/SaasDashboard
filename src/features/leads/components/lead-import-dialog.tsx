@@ -76,7 +76,7 @@ export function LeadImportDialog() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline" size="sm">
+        <Button variant="outline" size="sm" className="w-full sm:w-auto">
           <FileUp className="size-4" />
           Import CSV
         </Button>

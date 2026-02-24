@@ -108,7 +108,7 @@ export function LeadsTable({ leads, filters }: LeadsTableProps) {
 
   return (
     <div className="space-y-3 rounded-lg border bg-card p-3">
-      <div className="flex items-center gap-2">
+      <div className="flex flex-col items-start gap-2 sm:flex-row sm:items-center">
         <p className="text-sm text-muted-foreground">{selectedIds.length} selected</p>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -138,74 +138,76 @@ export function LeadsTable({ leads, filters }: LeadsTableProps) {
       </div>
 
       <div className="overflow-hidden rounded-lg border">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead className="w-10">
-                <Checkbox
-                  checked={allSelected}
-                  onCheckedChange={toggleAllRows}
-                  aria-label="Select all"
-                />
-              </TableHead>
-              <TableHead>Name</TableHead>
-              <TableHead>Email</TableHead>
-              <TableHead>Status</TableHead>
-              <TableHead className="text-right">Actions</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {leads.map((lead) => {
-              const checked = selectedIds.includes(lead.id);
+        <div className="overflow-x-auto">
+          <Table className="min-w-[680px]">
+            <TableHeader>
+              <TableRow>
+                <TableHead className="w-10">
+                  <Checkbox
+                    checked={allSelected}
+                    onCheckedChange={toggleAllRows}
+                    aria-label="Select all"
+                  />
+                </TableHead>
+                <TableHead>Name</TableHead>
+                <TableHead>Email</TableHead>
+                <TableHead>Status</TableHead>
+                <TableHead className="text-right">Actions</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {leads.map((lead) => {
+                const checked = selectedIds.includes(lead.id);
 
-              return (
-                <TableRow key={lead.id}>
-                  <TableCell>
-                    <Checkbox
-                      checked={checked}
-                      onCheckedChange={() => {
-                        toggleSelection(lead.id);
-                      }}
-                      aria-label={`Select ${lead.name}`}
-                    />
-                  </TableCell>
-                  <TableCell className="font-medium">
-                    <Link href={`/leads/${lead.id}`} className="hover:underline">
-                      {lead.name}
-                    </Link>
-                  </TableCell>
-                  <TableCell>{lead.email}</TableCell>
-                  <TableCell>
-                    <LeadStatusBadge status={lead.status} />
-                  </TableCell>
-                  <TableCell className="text-right">
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button variant="outline" size="sm">
-                          Actions
-                        </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end">
-                        <DropdownMenuItem asChild>
-                          <Link href={`/leads/${lead.id}`}>View detail</Link>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem
-                          onSelect={(event) => {
-                            event.preventDefault();
-                            void onDelete(lead.id);
-                          }}
-                          className="text-destructive"
-                        >
-                          Soft delete
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  </TableCell>
-                </TableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
+                return (
+                  <TableRow key={lead.id}>
+                    <TableCell>
+                      <Checkbox
+                        checked={checked}
+                        onCheckedChange={() => {
+                          toggleSelection(lead.id);
+                        }}
+                        aria-label={`Select ${lead.name}`}
+                      />
+                    </TableCell>
+                    <TableCell className="font-medium">
+                      <Link href={`/leads/${lead.id}`} className="hover:underline">
+                        {lead.name}
+                      </Link>
+                    </TableCell>
+                    <TableCell>{lead.email}</TableCell>
+                    <TableCell>
+                      <LeadStatusBadge status={lead.status} />
+                    </TableCell>
+                    <TableCell className="text-right">
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button variant="outline" size="sm">
+                            Actions
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end">
+                          <DropdownMenuItem asChild>
+                            <Link href={`/leads/${lead.id}`}>View detail</Link>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem
+                            onSelect={(event) => {
+                              event.preventDefault();
+                              void onDelete(lead.id);
+                            }}
+                            className="text-destructive"
+                          >
+                            Soft delete
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+        </div>
       </div>
     </div>
   );

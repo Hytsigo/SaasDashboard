@@ -40,7 +40,7 @@ export function LeadsPageClient({ initialFilters }: LeadsPageClientProps) {
   }
 
   return (
-    <section className="space-y-4">
+    <section className="space-y-4 sm:space-y-5">
       <header>
         <h1 className="text-2xl font-semibold">Leads</h1>
         <p className="text-sm text-muted-foreground">Track and qualify incoming leads.</p>
@@ -79,11 +79,11 @@ export function LeadsPageClient({ initialFilters }: LeadsPageClientProps) {
       {data && data.items.length > 0 ? (
         <>
           <LeadsTable leads={data.items} filters={filters} />
-          <footer className="flex items-center justify-between">
+          <footer className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-sm text-muted-foreground">
               Page {data.page} of {data.totalPages} ({data.total} records)
             </p>
-            <div className="flex items-center gap-2">
+            <div className="grid w-full grid-cols-2 gap-2 sm:flex sm:w-auto sm:items-center">
               <Button
                 variant="outline"
                 size="sm"

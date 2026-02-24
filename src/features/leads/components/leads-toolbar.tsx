@@ -71,9 +71,9 @@ export function LeadsToolbar({ filters, isLoading, onApply }: LeadsToolbarProps)
           {isLoading ? "Loading..." : "Apply filters"}
         </Button>
       </form>
-      <div className="flex flex-wrap items-center gap-2">
+      <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center">
         <LeadImportDialog />
-        <Button asChild variant="outline" size="sm">
+        <Button asChild variant="outline" size="sm" className="w-full sm:w-auto">
           <Link href={`/leads/export?${params.toString()}`}>
             <Download className="size-4" />
             Export CSV

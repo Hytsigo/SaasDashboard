@@ -87,7 +87,7 @@ export function AuthCard({ nextPath = "/" }: AuthCardProps) {
 
   return (
     <div className="w-full max-w-md overflow-hidden rounded-2xl border bg-card shadow-sm">
-      <div className="border-b bg-muted/40 px-6 py-5">
+      <div className="border-b bg-muted/40 px-4 py-4 sm:px-6 sm:py-5">
         <p className="text-xs font-semibold uppercase tracking-[0.24em] text-muted-foreground">
           SaaS Dashboard
         </p>
@@ -97,7 +97,7 @@ export function AuthCard({ nextPath = "/" }: AuthCardProps) {
         </p>
       </div>
 
-      <div className="p-6">
+      <div className="p-4 sm:p-6">
         <div className="mb-4 grid grid-cols-2 rounded-lg border bg-muted/30 p-1">
           <button
             type="button"
@@ -123,7 +123,7 @@ export function AuthCard({ nextPath = "/" }: AuthCardProps) {
           <div
             className={`flex w-[200%] transform transition-transform duration-500 ease-in-out ${slideClassName}`}
           >
-            <div className="w-1/2 pr-2">
+            <div className="w-1/2 pr-1 sm:pr-2">
               <AuthForm
                 key="login"
                 mode="login"
@@ -132,7 +132,7 @@ export function AuthCard({ nextPath = "/" }: AuthCardProps) {
                 isPending={isPending}
               />
             </div>
-            <div className="w-1/2 pl-2">
+            <div className="w-1/2 pl-1 sm:pl-2">
               <AuthForm
                 key="signup"
                 mode="signup"

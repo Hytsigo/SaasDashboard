@@ -68,7 +68,7 @@ export function MembersSettingsClient() {
   }
 
   return (
-    <section className="space-y-4">
+    <section className="space-y-4 sm:space-y-5">
       <header>
         <h1 className="text-2xl font-semibold">Members</h1>
         <p className="text-sm text-muted-foreground">
@@ -77,73 +77,76 @@ export function MembersSettingsClient() {
       </header>
 
       <div className="overflow-hidden rounded-lg border bg-card">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>User</TableHead>
-              <TableHead>Current role</TableHead>
-              <TableHead>Joined</TableHead>
-              <TableHead className="text-right">Actions</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {data.items.map((member) => {
-              const selectedRole = draftRoles[member.userId] ?? member.role;
+        <div className="overflow-x-auto">
+          <Table className="min-w-[720px]">
+            <TableHeader>
+              <TableRow>
+                <TableHead>User</TableHead>
+                <TableHead>Current role</TableHead>
+                <TableHead>Joined</TableHead>
+                <TableHead className="text-right">Actions</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {data.items.map((member) => {
+                const selectedRole = draftRoles[member.userId] ?? member.role;
 
-              return (
-                <TableRow key={member.userId}>
-                  <TableCell>
-                    <p className="font-medium">
-                      {member.isCurrentUser ? "You" : member.userId.slice(0, 8)}
-                    </p>
-                    <p className="text-xs text-muted-foreground">{member.userId}</p>
-                  </TableCell>
-                  <TableCell>
-                    <span className="rounded bg-muted px-2 py-1 text-xs uppercase tracking-wide">
-                      {member.role}
-                    </span>
-                  </TableCell>
-                  <TableCell className="text-sm text-muted-foreground">
-                    {formatDate(member.createdAt)}
-                  </TableCell>
-                  <TableCell className="text-right">
-                    <div className="inline-flex items-center gap-2">
-                      <select
-                        value={selectedRole}
-                        onChange={(event) =>
-                          setDraftRoles((current) => ({
-                            ...current,
-                            [member.userId]: event.target.value as Role,
-                          }))
-                        }
-                        className="h-9 rounded-md border bg-background px-2 text-sm"
-                        disabled={!data.canManageRoles || updateRoleMutation.isPending}
-                      >
-                        <option value="owner">owner</option>
-                        <option value="admin">admin</option>
-                        <option value="member">member</option>
-                      </select>
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        disabled={
-                          !data.canManageRoles ||
-                          selectedRole === member.role ||
-                          updateRoleMutation.isPending
-                        }
-                        onClick={() =>
-                          updateRoleMutation.mutate({ userId: member.userId, role: selectedRole })
-                        }
-                      >
-                        Save
-                      </Button>
-                    </div>
-                  </TableCell>
-                </TableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
+                return (
+                  <TableRow key={member.userId}>
+                    <TableCell>
+                      <p className="font-medium">
+                        {member.isCurrentUser ? "You" : member.userId.slice(0, 8)}
+                      </p>
+                      <p className="text-xs text-muted-foreground">{member.userId}</p>
+                    </TableCell>
+                    <TableCell>
+                      <span className="rounded bg-muted px-2 py-1 text-xs uppercase tracking-wide">
+                        {member.role}
+                      </span>
+                    </TableCell>
+                    <TableCell className="text-sm text-muted-foreground">
+                      {formatDate(member.createdAt)}
+                    </TableCell>
+                    <TableCell className="text-right">
+                      <div className="inline-flex flex-col items-end gap-2 sm:flex-row sm:items-center">
+                        <select
+                          value={selectedRole}
+                          onChange={(event) =>
+                            setDraftRoles((current) => ({
+                              ...current,
+                              [member.userId]: event.target.value as Role,
+                            }))
+                          }
+                          className="h-9 w-full rounded-md border bg-background px-2 text-sm sm:w-auto"
+                          disabled={!data.canManageRoles || updateRoleMutation.isPending}
+                        >
+                          <option value="owner">owner</option>
+                          <option value="admin">admin</option>
+                          <option value="member">member</option>
+                        </select>
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          disabled={
+                            !data.canManageRoles ||
+                            selectedRole === member.role ||
+                            updateRoleMutation.isPending
+                          }
+                          className="w-full sm:w-auto"
+                          onClick={() =>
+                            updateRoleMutation.mutate({ userId: member.userId, role: selectedRole })
+                          }
+                        >
+                          Save
+                        </Button>
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+        </div>
       </div>
     </section>
   );

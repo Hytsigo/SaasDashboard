@@ -34,7 +34,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
   }
 
   return (
-    <main className="relative flex min-h-screen items-center justify-center overflow-hidden px-6 py-10">
+    <main className="relative flex min-h-screen items-center justify-center overflow-hidden px-3 py-6 sm:px-6 sm:py-10">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_15%,hsl(var(--muted)),transparent_40%),radial-gradient(circle_at_85%_20%,hsl(var(--accent)),transparent_35%),radial-gradient(circle_at_50%_80%,hsl(var(--secondary)),transparent_40%)] opacity-30" />
       <AuthCard nextPath={nextPath} />
     </main>
